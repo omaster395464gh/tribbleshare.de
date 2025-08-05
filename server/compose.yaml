@@ -1,4 +1,15 @@
 services:
+  app:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
   emby:
     image: emby/embyserver
     container_name: embyserver
@@ -14,8 +25,8 @@ services:
       - ./data/shows:/mnt/shows # Media directory
       - ./data/movies:/mnt/movies # Media directory
       - ./data/music:/mnt/music # Media directory
-    ports:
-      - 127.0.0.1:8096:8096 # HTTP port
+    #ports:
+      # - 127.0.0.1:8096:8096 # HTTP port
       # - 8920:8920 # HTTPS port
     devices:
       - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
