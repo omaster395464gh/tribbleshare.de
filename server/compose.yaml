@@ -20,11 +20,11 @@ services:
       - GID=1000 # The GID to run emby as (default 2)
       - GIDLIST=1000 # A comma-separated list of additional GIDs to run emby as (default: 2)
     volumes:
-      - ./data/config:/config # Configuration directory
-      - ./data/demo:/mnt/demo # Media directory
-      - ./data/shows:/mnt/shows # Media directory
-      - ./data/movies:/mnt/movies # Media directory
-      - ./data/music:/mnt/music # Media directory
+      - ./emby_data/config:/config # Configuration directory
+      - ./emby_data/demo:/mnt/demo # Media directory
+      - ./emby_data/shows:/mnt/shows # Media directory
+      - ./emby_data/movies:/mnt/movies # Media directory
+      - ./emby_data/music:/mnt/music # Media directory
     #ports:
       # - 127.0.0.1:8096:8096 # HTTP port
       # - 8920:8920 # HTTPS port
