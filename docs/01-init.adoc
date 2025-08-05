@@ -1,0 +1,16 @@
+:source-highlighter: rouge
+
+== Vorbereitung
+
+[source,bash]
+----
+adduser admin
+usermod -aG sudo admin
+echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/custom-admin
+----
+
+== Software-Installation
+[source,bash]
+----
+sudo apt install git git-lfs docker docker-compose
+----
