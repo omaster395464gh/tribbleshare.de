@@ -7,8 +7,8 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - ./proxy_data:/data
+      - ./proxy_letsencrypt:/etc/letsencrypt
 
   emby:
     image: emby/embyserver
