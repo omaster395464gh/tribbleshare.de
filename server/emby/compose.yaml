@@ -1,0 +1,23 @@
+services:
+  emby:
+    image: emby/embyserver
+    container_name: embyserver
+    #runtime: nvidia # Expose NVIDIA GPUs
+    #network_mode: host # Enable DLNA and Wake-on-Lan
+    environment:
+      - UID=1000 # The UID to run emby as (default: 2)
+      - GID=1000 # The GID to run emby as (default 2)
+      - GIDLIST=1000 # A comma-separated list of additional GIDs to run emby as (default: 2)
+    volumes:
+      - ./data/config:/config # Configuration directory
+      - ./data/demo:/mnt/demo # Media directory
+      - ./data/shows:/mnt/shows # Media directory
+      - ./data/movies:/mnt/movies # Media directory
+      - ./data/music:/mnt/music # Media directory
+    ports:
+      - 127.0.0.1:8096:8096 # HTTP port
+      # - 8920:8920 # HTTPS port
+    devices:
+      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+      # - /dev/vchiq:/dev/vchiq # MMAL/OMX on Raspberry Pi
+    restart: on-failure
