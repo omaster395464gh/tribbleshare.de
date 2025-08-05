@@ -1,4 +1,4 @@
-:source-highlighter: rouge
+:source-highlighter: highlight.js
 
 == Vorbereitung
 
