@@ -17,11 +17,16 @@ services:
       - 80:3000
     volumes:
       - ./homepage_config:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
     environment:
       HOMEPAGE_ALLOWED_HOSTS: tribbleshare.follow-inconnu.ts.net
       PUID: 1000
       PGID: 1000
+    labels:
+      - homepage.group=Entwicklung
+      - homepage.name=Homepage
+      - homepage.icon=homepage.png
+      - homepage.href=http://tribbleshare.follow-inconnu.ts.net/
+      - homepage.description=Homepage
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: dockerproxy
@@ -63,7 +68,7 @@ services:
       - homepage.name=Emby
       - homepage.icon=emby.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:8096/
-      - homepage.description=Media server
+      - homepage.description=Filme + Serien
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest #
     container_name: mealie
@@ -84,8 +89,8 @@ services:
       TZ: "Europe/Berlin"
       BASE_URL: http://tribbleshare.follow-inconnu.ts.net:9925/
     labels:
-      - homepage.group=Food
+      - homepage.group=Essen
       - homepage.name=Mealie
       - homepage.icon=https://docs.mealie.io/assets/img/favicon.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
-      - homepage.description=Food
+      - homepage.description=Mealie Rezept Manager
