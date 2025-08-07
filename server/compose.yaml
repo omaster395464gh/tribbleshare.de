@@ -1,15 +1,14 @@
 services:
-  app:
-    image: 'docker.io/jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - ./proxy_data:/data
-      - ./proxy_letsencrypt:/etc/letsencrypt
-
+#  app:
+#    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+#    restart: unless-stopped
+#    ports:
+#      - '80:80'
+#      - '81:81'
+#      - '443:443'
+#    volumes:
+#      - ./proxy_data:/data
+#      - ./proxy_letsencrypt:/etc/letsencrypt
   emby:
     image: emby/embyserver
     container_name: embyserver
@@ -26,9 +25,29 @@ services:
       - ./emby_data/movies:/mnt/movies # Media directory
       - ./emby_data/music:/mnt/music # Media directory
     ports:
-      - 8096:8096 # HTTP port
+      - "8096:8096" # HTTP port
       # - 8920:8920 # HTTPS port
     devices:
       - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
       # - /dev/vchiq:/dev/vchiq # MMAL/OMX on Raspberry Pi
     restart: on-failure
+
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest #
+    container_name: mealie
+    restart: always
+    ports:
+      - "9925:9000" #
+    deploy:
+      resources:
+        limits:
+          memory: 1000M #
+    volumes:
+      - ./mealie_data:/app/data/
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: "Europe/Berlin"
+      BASE_URL: http://tribbleshare.follow-inconnu.ts.net:9925/
