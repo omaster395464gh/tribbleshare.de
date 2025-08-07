@@ -13,6 +13,8 @@
 adduser admin
 usermod -aG sudo admin
 echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/custom-admin
+curl -fsSL https://tailscale.com/install.sh | sh
+tailscale up
 ----
 
 === Software-Installation (admin) and docker run
@@ -21,7 +23,7 @@ echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/custom-admin
 sudo apt install git git-lfs docker docker-compose
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
-docker-compose up -d
+sudo docker-compose up -d
 ----
 
 === Upgrade / Software-Wartung
