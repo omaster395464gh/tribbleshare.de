@@ -1,6 +1,12 @@
 :source-highlighter: highlight.js
 
-== Vorbereitung
+== tribbleshare.de
+
+=== Voraussetzungen
+* https://aklam.io/jwttmm[Ionos Server VPS L (6 CPU, 8 GB RAM)*]
+* Tailscale VPN
+
+=== Vorbereitung
 
 [source,bash]
 ----
@@ -9,8 +15,21 @@ usermod -aG sudo admin
 echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/custom-admin
 ----
 
-== Software-Installation
+=== Software-Installation (admin) and docker run
 [source,bash]
 ----
 sudo apt install git git-lfs docker docker-compose
+git pull https://github.com/omaster395464gh/tribbleshare.de.git
+cd ~/tribbleshare.de/server
+docker-compose up -d
 ----
+
+=== Upgrade / Software-Wartung
+
+[source,bash]
+.~/tribbleshare.de/scripts/1-do-upgrade.sh
+----
+include::../scripts/1-do-upgrade.sh[]
+----
+
+* affiliate Link
