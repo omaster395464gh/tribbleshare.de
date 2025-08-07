@@ -14,8 +14,8 @@ services:
 
   emby:
     image: emby/embyserver
-    restart: unless-stopped
     container_name: emby
+    restart: unless-stopped
     #runtime: nvidia # Expose NVIDIA GPUs
     #network_mode: host # Enable DLNA and Wake-on-Lan
     environment:
@@ -69,6 +69,7 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    restart: unless-stopped
     ports:
       - 80:3000
     volumes:
@@ -86,6 +87,7 @@ services:
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: dockerproxy
+    restart: unless-stopped
     environment:
       - CONTAINERS=1 # Allow access to viewing containers
       - SERVICES=1 # Allow access to viewing services (necessary when using Docker Swarm)
@@ -95,4 +97,3 @@ services:
       - 127.0.0.1:2375:2375
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
-    restart: unless-stopped

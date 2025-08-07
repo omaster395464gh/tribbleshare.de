@@ -1,0 +1,9 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Entwicklung:
+    - Github tribbleshare.de:
+        - abbr: GH
+          href: https://github.com/omaster395464gh/tribbleshare.de
+
