@@ -9,6 +9,18 @@ services:
     volumes:
       - ./proxy_data:/data
       - ./proxy_letsencrypt:/etc/letsencrypt
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ./homepage_config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: tribbleshare.follow-inconnu.ts.net
+      PUID: 1000
+      PGID: 1000
   emby:
     image: emby/embyserver
     restart: unless-stopped
