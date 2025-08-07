@@ -22,11 +22,11 @@ services:
       PUID: 1000
       PGID: 1000
     labels:
-      - homepage.group=Entwicklung
+      - homepage.group=Server Tools
       - homepage.name=Homepage
       - homepage.icon=homepage.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net/
-      - homepage.description=Homepage
+      - homepage.description=Aktuelle Seite
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: dockerproxy
@@ -93,4 +93,4 @@ services:
       - homepage.name=Mealie
       - homepage.icon=https://docs.mealie.io/assets/img/favicon.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
-      - homepage.description=Mealie Rezept Manager
+      - homepage.description=Rezept Manager
