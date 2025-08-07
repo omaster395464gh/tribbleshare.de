@@ -24,6 +24,10 @@ sudo apt install git git-lfs docker docker-compose
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
 sudo docker-compose up -d
+sudo tailscale cert \
+  --cert-file /home/admin/certs/tribbleshare.follow-inconnu.ts.net.crt \
+  --key-file /home/admin/certs/tribbleshare.follow-inconnu.ts.net.key \
+  tribbleshare.follow-inconnu.ts.net
 ----
 
 === Upgrade / Software-Wartung
