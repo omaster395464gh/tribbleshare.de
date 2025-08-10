@@ -40,6 +40,9 @@ services:
       - homepage.icon=emby.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:8096/
       - homepage.description=Filme + Serien
+      - homepage.widget.type=embie
+      - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:8096/
+      - homepage.widget.key=${EMBY_KEY}
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest #
     container_name: mealie
