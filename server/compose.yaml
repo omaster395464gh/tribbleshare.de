@@ -66,7 +66,7 @@ services:
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.description=Rezept Manager
       - homepage.widget.type=mealie
-  #    - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9925/
+      - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.widget.key=${MEALIE_KEY}
       - homepage.widget.version=2
   homepage:
