@@ -43,6 +43,12 @@ services:
       - homepage.widget.type=emby
       - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:8096/
       - homepage.widget.key=${EMBY_KEY}
+      - homepage.widget.enableBlocks=true # optional, defaults to false
+      - homepage.widget.enableNowPlaying=true # optional, defaults to true
+      - homepage.widget.enableUser=true # optional, defaults to false
+      - homepage.widget.enableMediaControl=false # optional, defaults to true
+      - homepage.widget.showEpisodeNumber=true # optional, defaults to false
+      - homepage.widget.expandOneStreamToTwoRows=false # optional, defaults to true
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest #
     container_name: mealie
