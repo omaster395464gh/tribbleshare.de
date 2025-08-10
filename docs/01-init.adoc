@@ -23,7 +23,10 @@ tailscale up
 sudo apt install git git-lfs docker docker-compose
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
+# Allow docker without sudo
+sudo usermod -aG docker $USER
 sudo docker-compose up -d
+# TLS Cert
 sudo tailscale cert \
   --cert-file /home/admin/certs/tribbleshare.follow-inconnu.ts.net.crt \
   --key-file /home/admin/certs/tribbleshare.follow-inconnu.ts.net.key \

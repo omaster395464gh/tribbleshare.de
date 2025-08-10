@@ -65,7 +65,10 @@ services:
       - homepage.icon=https://docs.mealie.io/assets/img/favicon.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.description=Rezept Manager
-
+      - homepage.widget.type=mealie
+  #    - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9925/
+      - homepage.widget.key=${MEALIE_KEY}
+      - homepage.widget.version=2
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
