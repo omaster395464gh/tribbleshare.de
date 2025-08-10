@@ -62,7 +62,7 @@ services:
     labels:
       - homepage.group=Essen
       - homepage.name=Mealie
-      - homepage.icon=https://docs.mealie.io/assets/img/favicon.png
+      - homepage.icon=mealie.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.description=Rezept Manager
       - homepage.widget.type=mealie
