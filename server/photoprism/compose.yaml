@@ -45,7 +45,7 @@ services:
     ## Before you start the service, please check the following config options (and change them as needed):
     ## https://docs.photoprism.app/getting-started/config-options/
     environment:
-      PHOTOPRISM_ADMIN_USER: "admin"                 # admin login username
+      PHOTOPRISM_ADMIN_USER: ${PHOTOPRISM_ADMIN_USERNAME}                # admin login username
       PHOTOPRISM_ADMIN_PASSWORD: ${PHOTOPRISM_ADMIN_PASSWORD}          # initial admin password (8-72 characters)
       PHOTOPRISM_AUTH_MODE: "password"               # authentication mode (public, password)
       PHOTOPRISM_DISABLE_TLS: "true"                # disables HTTPS/TLS even if the site URL starts with https:// and a certificate is available
@@ -109,8 +109,8 @@ services:
     ## Start as non-root user before initialization (supported: 0, 33, 50-99, 500-600, and 900-1200):
     # user: "1000:1000"
     ## Shared devices for video hardware transcoding (optional):
-    # devices:
-    #  - "/dev/dri:/dev/dri"                         # Required Intel QSV or VAAPI hardware transcoding
+    devices:
+      - "/dev/dri:/dev/dri"                         # Required Intel QSV or VAAPI hardware transcoding
     #  - "/dev/video11:/dev/video11"                 # Video4Linux Video Encode Device (h264_v4l2m2m)
     working_dir: "/photoprism" # do not change or remove
     ## Storage Folders: "~" is a shortcut for your home directory, "." for the current directory
@@ -136,9 +136,9 @@ services:
       - homepage.description=Fotos
       - homepage.widget.type=photoprism
       - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:2342
-      - homepage.widget.admin=admin
-      - homepage.widget.password=${PHOTOPRISM_ADMIN_PASSWORD}
-      # - homepage.widget.key= # required only if using app passwords
+      - homepage.widget.admin=${PHOTOPRISM_ADMIN_USERNAME}
+      #- homepage.widget.password=${PHOTOPRISM_ADMIN_PASSWORD}
+      - homepage.widget.key=${PHOTOPRISM_WIDGET_KEY}
 
   ## MariaDB Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
