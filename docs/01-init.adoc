@@ -38,7 +38,7 @@ sudo tailscale cert \
 [source,bash]
 .~/tribbleshare.de/scripts/1-do-upgrade.sh
 ----
-include::../scripts/1-do-upgrade.sh[]
+bash ~/tribbleshare.de/scripts/1-do-upgrade.sh
 ----
 
 * affiliate Link
