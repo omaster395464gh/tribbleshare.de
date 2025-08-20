@@ -78,6 +78,26 @@ services:
       - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.widget.key=${MEALIE_KEY}
       - homepage.widget.version=2
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 9978:80
+    volumes:
+      - ./data_audiobookshelf/audiobooks:/audiobooks
+      - ./data_audiobookshelf/podcasts:/podcasts
+      - ./data_audiobookshelf/config:/config
+      - ./data_audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=Europe/Berline
+    labels:
+      - homepage.group=Media
+      - homepage.name=AudioBookShelf
+      - homepage.icon=audiobookshelf.png
+      - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9978/
+      - homepage.description=Self-hosted audiobook and podcast server
+      - homepage.widget.type=audiobookshelf
+      - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9978/
+      - homepage.widget.key=${AUDIOBOOKSHELF_KEY}
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
