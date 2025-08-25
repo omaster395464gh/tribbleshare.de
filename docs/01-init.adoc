@@ -3,7 +3,7 @@
 == tribbleshare.de
 
 === Voraussetzungen
-* https://aklam.io/jwttmm[Ionos Server VPS L (6 CPU, 8 GB RAM)*]
+* https://aklam.io/jwttmm[Ionos Server VPS L (6 CPU, 8 GB RAM)*] / Debian 13 (initial Debian 12)
 * Tailscale VPN
 
 === Vorbereitung
