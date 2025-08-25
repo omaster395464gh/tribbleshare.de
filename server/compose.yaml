@@ -87,8 +87,11 @@ services:
       - ./data_audiobookshelf/podcasts:/podcasts
       - ./data_audiobookshelf/config:/config
       - ./data_audiobookshelf/metadata:/metadata
+    # set user 1000
+    # https://github.com/advplyr/audiobookshelf/issues/3527:
+    user: 1000:1000
     environment:
-      - TZ=Europe/Berline
+      - TZ=Europe/Berlin
     labels:
       - homepage.group=Media
       - homepage.name=AudioBookShelf
