@@ -20,7 +20,7 @@ tailscale up
 === Software-Installation (admin) and docker run
 [source,bash]
 ----
-sudo apt install git git-lfs docker docker-compose
+sudo apt install git git-lfs docker docker-compose rsync
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
 # Allow docker without sudo
