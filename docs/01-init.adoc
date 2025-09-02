@@ -3,7 +3,7 @@
 == tribbleshare.de
 
 === Voraussetzungen
-* https://aklam.io/jwttmm[Ionos Server VPS L (6 CPU, 8 GB RAM)*] / Debian 13 (initial Debian 12)
+* *Ionos Server VPS L (6 CPU, 8 GB RAM)* / Debian 13 (initial Debian 12)
 * Tailscale VPN
 
 === Vorbereitung
@@ -13,6 +13,7 @@
 adduser admin
 usermod -aG sudo admin
 echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/custom-admin
+echo 'Defaults:%sudo env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy SSH_AUTH_SOCK RESTIC_PASSWORD"' >>/etc/sudoers.d/custom-admin
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up
 ----
@@ -20,7 +21,7 @@ tailscale up
 === Software-Installation (admin) and docker run
 [source,bash]
 ----
-sudo apt install git git-lfs docker docker-compose rsync
+sudo apt install git git-lfs docker docker-compose rsync restic
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
 # Allow docker without sudo
@@ -41,4 +42,22 @@ sudo tailscale cert \
 bash ~/tribbleshare.de/scripts/1-do-upgrade.sh
 ----
 
-* affiliate Link
+=== Backup / Restic
+
+[source,bash]
+.~/tribbleshare.de/scripts/2-do-backup.sh
+----
+# restic vorbereiten / tribbleshare
+# Nutzer ts_backup anlegen
+# RESTIC_PASSWORD setzen in /etc/profile.d/restic.sh
+sftp ts_backup@box3 <<EOF
+pwd
+EOF
+# Initialisieren
+sudo restic -r sftp:ts_backup@box3:/F:/Backups/ts_backup init
+
+# Backup ausführen
+sudo restic -r sftp:ts_backup@box3:/F:/Backups/ts_backup backup /home/admin
+
+----
+https://restic.net/
