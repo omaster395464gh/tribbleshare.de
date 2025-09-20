@@ -10,6 +10,33 @@
 #   sudo systemctl daemon-reload
 #   sudo systemctl enable --now auto-update-restart.timer
 #
+#  set unattended-upgrade options in /etc/apt/apt.conf.d/50unattended-upgrades
+#   //
+#   Unattended-Upgrade::Origins-Pattern {
+#       // ...
+#       // Tailscale Repo
+#       "o=Tailscale,n=${distro_codename},l=Tailscale";
+#       // ...
+
+#   // (kernel images, kernel headers and kernel version locked tools).
+#   Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+#   // Do automatic removal of newly unused dependencies after the upgrade
+#   Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+#   // Do automatic removal of unused packages after the upgrade
+#   // (equivalent to apt-get autoremove)
+#   Unattended-Upgrade::Remove-Unused-Dependencies "true";
+#   // Automatically reboot *WITHOUT CONFIRMATION* if
+#   //  the file /var/run/reboot-required is found after the upgrade
+#   Unattended-Upgrade::Automatic-Reboot "true";
+#   // Automatically reboot even if there are users currently logged in
+#   // when Unattended-Upgrade::Automatic-Reboot is set to true
+#   Unattended-Upgrade::Automatic-Reboot-WithUsers "true";
+#   // If automatic reboot is enabled and needed, reboot at the specific
+#   // time instead of immediately
+#   //  Default: "now"
+#   Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+
+#
 # check:
 #   time sudo /usr/local/sbin/3-auto-update-restart.sh && tail -n100 /var/log/auto-update-restart.log
 #   systemctl list-timers auto-update-restart.timer
@@ -26,10 +53,6 @@ uptime >> $LOGFILE
 apt-get update >> $LOGFILE 2>&1
 DEBIAN_FRONTEND=noninteractive \
   unattended-upgrade -v >> $LOGFILE 2>&1
-
-# Alte Pakete entfernen
-DEBIAN_FRONTEND=noninteractive \
-  apt -y autoremove >> $LOGFILE 2>&1
 
 # Dienste prüfen
 NEEDRESTART_MODE=a \
