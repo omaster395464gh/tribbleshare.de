@@ -41,8 +41,8 @@
 #   time sudo /usr/local/sbin/3-auto-update-restart.sh && tail -n100 /var/log/auto-update-restart.log
 #   systemctl list-timers auto-update-restart.timer
 #
-# run    
-#   sudo systemctl start --now auto-update-restart.timer
+# run
+#   sudo systemctl start auto-update-restart.service
 
 LOGFILE="/var/log/auto-update-restart.log"
 echo "===================" >> $LOGFILE
