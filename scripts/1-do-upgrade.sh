@@ -2,8 +2,8 @@
 #
 date
 pushd $PWD
-sudo apt-get update
-sudo apt-get upgrade
+# sudo apt-get update
+# sudo apt-get upgrade
 cd ~/tribbleshare.de/server || exit
 
 sudo docker-compose pull

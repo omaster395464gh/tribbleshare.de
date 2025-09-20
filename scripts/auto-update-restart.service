@@ -1,0 +1,6 @@
+[Unit]
+Description=Daily auto update and restart if needed
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/3-auto-update-restart.sh
