@@ -6,12 +6,14 @@ pushd $PWD
 # sudo apt-get upgrade
 cd ~/tribbleshare.de/server || exit
 
-sudo docker-compose pull
-sudo docker-compose up -d
+docker-compose pull
+docker-compose up -d
 
 cd ~/tribbleshare.de/server/photoprism
-sudo docker-compose pull
-sudo docker-compose up -d
+docker-compose pull
+docker-compose up -d
+docker system prune -f -a
+
 
 popd
 date
