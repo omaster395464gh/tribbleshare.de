@@ -69,7 +69,7 @@ services:
       TZ: "Europe/Berlin"
       BASE_URL: http://tribbleshare.follow-inconnu.ts.net:9925/
     labels:
-      - homepage.group=Essen
+      - homepage.group=Media
       - homepage.name=Mealie
       - homepage.icon=mealie.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
@@ -114,7 +114,7 @@ services:
       PUID: 1000
       PGID: 1000
     labels:
-      - homepage.group=Server Tools
+      - homepage.group=Media
       - homepage.name=Homepage
       - homepage.icon=homepage.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net/

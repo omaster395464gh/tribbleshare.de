@@ -20,7 +20,7 @@ statusStyle: basic
 layout:
   Media:
     style: row
-    columns: 2
+    columns: 3
 
 providers:
 # openweathermap: openweathermapapikey
