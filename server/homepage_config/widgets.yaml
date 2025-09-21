@@ -1,0 +1,16 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/info-widgets/
+
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+    uptime: true
+
+- search:
+    provider: custom
+    url: https://www.ecosia.org/search?q=
+    target: _blank
+    suggestionUrl: https://ac.ecosia.org/autocomplete?type=list&q=
+    showSearchSuggestions: true # Optional

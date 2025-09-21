@@ -13,9 +13,14 @@ background:
   opacity: 50 # 0-100
 iconStyle: theme # optional, defaults to gradient
 showStats: true
-language: de
+language: en
 headerStyle: boxed
 statusStyle: basic
+
+layout:
+  Media:
+    style: row
+    columns: 2
 
 providers:
 # openweathermap: openweathermapapikey
