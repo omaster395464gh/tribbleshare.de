@@ -80,6 +80,7 @@ services:
       - homepage.widget.version=2
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
+    restart: unless-stopped
     ports:
       - 9978:80
     volumes:
