@@ -68,6 +68,11 @@ services:
       PGID: 1000
       TZ: "Europe/Berlin"
       BASE_URL: http://tribbleshare.follow-inconnu.ts.net:9925/
+      # 10 Jahre Token time
+      TOKEN_TIME: 87600
+      # set auth insecure / https://github.com/mealie-recipes/mealie/blob/b2a3430f2c5a404c826c4818f65902350b66cd6f/mealie/core/config.py#L21
+      PRODUCTION: false
+      DATA_DIR: /app/data      
     labels:
       - homepage.group=Media
       - homepage.name=Mealie
