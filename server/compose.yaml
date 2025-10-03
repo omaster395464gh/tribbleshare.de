@@ -60,29 +60,30 @@ services:
         limits:
           memory: 1000M #
     volumes:
-      - ./mealie_data:/app/data/
+      - ./mealie_data:/app/data
+      - ./certs:/app/certs:ro
     environment:
       # Set Backend ENV Variables Here
       ALLOW_SIGNUP: "false"
       PUID: 1000
       PGID: 1000
       TZ: "Europe/Berlin"
-      BASE_URL: http://tribbleshare.follow-inconnu.ts.net:9925/
+      BASE_URL: https://tribbleshare.follow-inconnu.ts.net:9925/
       # 10 Jahre Token time
       TOKEN_TIME: 87600
-      # set auth insecure / https://github.com/mealie-recipes/mealie/blob/b2a3430f2c5a404c826c4818f65902350b66cd6f/mealie/core/config.py#L21
-      PRODUCTION: false
-      DATA_DIR: /app/data      
+      TLS_CERTIFICATE_PATH: /app/certs/tribbleshare.follow-inconnu.ts.net.crt
+      TLS_PRIVATE_KEY_PATH: /app/certs/tribbleshare.follow-inconnu.ts.net.key
     labels:
       - homepage.group=Media
       - homepage.name=Mealie
       - homepage.icon=mealie.png
-      - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9925/
+      - homepage.href=https://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.description=Rezept Manager
       - homepage.widget.type=mealie
-      - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:9925/
+      - homepage.widget.url=https://tribbleshare.follow-inconnu.ts.net:9925/
       - homepage.widget.key=${MEALIE_KEY}
       - homepage.widget.version=2
+
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     restart: unless-stopped
