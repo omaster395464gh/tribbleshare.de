@@ -69,8 +69,8 @@ services:
       PGID: 1000
       TZ: "Europe/Berlin"
       BASE_URL: https://tribbleshare.follow-inconnu.ts.net:9925/
-      # 10 Jahre Token time
-      TOKEN_TIME: 87600
+      # 396h Token time
+      TOKEN_TIME: 9504
       TLS_CERTIFICATE_PATH: /app/certs/tribbleshare.follow-inconnu.ts.net.crt
       TLS_PRIVATE_KEY_PATH: /app/certs/tribbleshare.follow-inconnu.ts.net.key
     labels:

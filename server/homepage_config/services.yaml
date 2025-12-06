@@ -7,3 +7,7 @@
         icon: nextcloud.png
         href: https://cloud.tribbleshare.de/
         description: Remote-Zusammenarbeit leicht gemacht
+    - NASsaja:
+        icon: ugreen.png
+        href: http://nassaja.follow-inconnu.ts.net:9999/
+        description: Huge Capacity | Easy to Use | Secure
