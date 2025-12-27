@@ -11,3 +11,12 @@
         icon: ugreen.png
         href: http://nassaja.follow-inconnu.ts.net:9999/
         description: Huge Capacity | Easy to Use | Secure
+    - paperless:
+        icon: paperless.png
+        href: http://nassaja.follow-inconnu.ts.net:8777/
+        description: scan, index and archive all your documents
+        widget:
+          type: paperlessngx
+          url: http://nassaja.follow-inconnu.ts.net:8777/
+          username: demo
+          password: ***********************
