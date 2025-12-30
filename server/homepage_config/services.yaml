@@ -18,5 +18,4 @@
         widget:
           type: paperlessngx
           url: http://nassaja.follow-inconnu.ts.net:8777/
-          username: demo
-          password: ***********************
+          token: ***********************
