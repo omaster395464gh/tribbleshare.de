@@ -45,7 +45,7 @@ bash ~/tribbleshare.de/scripts/1-do-upgrade.sh
 === Reboot automatisieren
 
 [source,bash]
-/etc/apt/apt.conf.d/50unattended-upgrades
+./etc/apt/apt.conf.d/50unattended-upgrades
 ----
 Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
@@ -58,7 +58,7 @@ Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 === Troubleshooting / Reboot automatisieren / Server hängt (Schreiben auf Terminal)
 
 [source,bash]
-/etc/apt/apt.conf.d/50unattended-upgrades
+./etc/apt/apt.conf.d/50unattended-upgrades
 ----
 GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no"
 ----
@@ -66,14 +66,14 @@ dann:
 update-grub
 
 [source,bash]
-/etc/systemd/system.conf
+./etc/systemd/system.conf
 ----
 DefaultTimeoutStopSec=30s
 ----
 
 === Troubleshooting / NFS nassaja einhängen
 [source,bash]
-/etc/fstab
+./etc/fstab
 ----
 nassaja:/volume1/Multimedia  /Multimedia  nfs  noauto,x-systemd.automount,x-systemd.idle-timeout=600,_netdev,nofail,noatime,tcp,actimeo=1800  0  0
 ----
