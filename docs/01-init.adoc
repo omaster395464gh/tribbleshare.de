@@ -21,7 +21,7 @@ tailscale up
 === Software-Installation (admin) and docker run
 [source,bash]
 ----
-sudo apt install git git-lfs docker docker-compose rsync restic
+sudo apt install git git-lfs docker docker-compose rsync restic nfs-common
 git pull https://github.com/omaster395464gh/tribbleshare.de.git
 cd ~/tribbleshare.de/server
 # Allow docker without sudo
@@ -41,6 +41,43 @@ sudo tailscale cert \
 ----
 bash ~/tribbleshare.de/scripts/1-do-upgrade.sh
 ----
+
+=== Reboot automatisieren
+
+[source,bash]
+/etc/apt/apt.conf.d/50unattended-upgrades
+----
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
+Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+----
+
+=== Troubleshooting / Reboot automatisieren / Server hängt (Schreiben auf Terminal)
+
+[source,bash]
+/etc/apt/apt.conf.d/50unattended-upgrades
+----
+GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no"
+----
+dann: 
+update-grub
+
+[source,bash]
+/etc/systemd/system.conf
+----
+DefaultTimeoutStopSec=30s
+----
+
+=== Troubleshooting / NFS nassaja einhängen
+[source,bash]
+/etc/fstab
+----
+nassaja:/volume1/Multimedia  /Multimedia  nfs  noauto,x-systemd.automount,x-systemd.idle-timeout=600,_netdev,nofail,noatime,tcp,actimeo=1800  0  0
+----
+
 
 === Backup / Restic
 

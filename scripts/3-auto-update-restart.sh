@@ -63,8 +63,9 @@ su - admin -c "bash /home/admin/tribbleshare.de/scripts/1-do-upgrade.sh" >> $LOG
 
 # Kernel-Reboot nötig?
 if [ -f /var/run/reboot-required ]; then
-  echo "Reboot required -> restarting..." >> $LOGFILE
-  /sbin/reboot
+  echo "Reboot required, but skipped" >> $LOGFILE
+  # echo "Reboot required -> restarting..." >> $LOGFILE
+  # /sbin/reboot
 else
   echo "No reboot needed." >> $LOGFILE
 fi
