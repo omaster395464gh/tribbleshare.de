@@ -58,22 +58,23 @@ Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 === Troubleshooting / Reboot automatisieren / Server hängt (Schreiben auf Terminal)
 
 [source,bash]
-./etc/apt/apt.conf.d/50unattended-upgrades
+./etc/apt/apt.conf.d/50unattended-upgrades ergänzen
 ----
 GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no"
+# GRUB_CMDLINE_LINUX_DEFAULT=""
 ----
 dann: 
 update-grub
 
 [source,bash]
-./etc/systemd/system.conf
+./etc/systemd/system.conf ergänzen
 ----
 DefaultTimeoutStopSec=30s
 ----
 
 === Troubleshooting / NFS nassaja einhängen
 [source,bash]
-./etc/fstab
+./etc/fstab ergänzen
 ----
 nassaja:/volume1/Multimedia  /Multimedia  nfs  noauto,x-systemd.automount,x-systemd.idle-timeout=600,_netdev,nofail,noatime,tcp,actimeo=1800  0  0
 ----
