@@ -37,7 +37,7 @@ sudo tailscale cert \
 === Upgrade / Software-Wartung
 
 [source,bash]
-.~/tribbleshare.de/scripts/1-do-upgrade.sh
+.~/tribbleshare.de/scripts/1-do-upgrade.sh (Einrichtung als Dienst: lesen und Anweisungen in den Kommentaren ausführen)
 ----
 bash ~/tribbleshare.de/scripts/1-do-upgrade.sh
 ----
@@ -58,7 +58,7 @@ Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 === Troubleshooting / Reboot automatisieren / Server hängt (Schreiben auf Terminal)
 
 [source,bash]
-./etc/apt/apt.conf.d/50unattended-upgrades ergänzen
+./etc/grub.conf ergänzen
 ----
 GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no"
 # GRUB_CMDLINE_LINUX_DEFAULT=""
