@@ -55,6 +55,24 @@ Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 ----
 
+=== Troubleshooting / Neustart des Servers
+
+==== SSH (wenn Server noch läuft)
+* Windows: PageAnt starten, Key laden
+* Login per SSH an admin@tribbleshare.follow-inconnu.ts.net (Windows per Putty, Linux per Terminal)
+[source,bash]
+----
+ssh admin@tribbleshare.follow-inconnu.ts.net
+sudo shutdown -r now
+----
+
+==== Ionos Server Console (wenn nix mehr geht)
+* Website https://www.ionos.de
+* Login 33*. (Passwort + 2FA)
+* Option "Server & Cloud"
+* Server: "My VPS" markieren
+* Aktionen "Neu starten"
+
 === Troubleshooting / Reboot automatisieren / Server hängt (Schreiben auf Terminal)
 
 [source,bash]
