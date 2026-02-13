@@ -78,7 +78,7 @@ sudo shutdown -r now
 [source,bash]
 ./etc/grub.conf ergänzen
 ----
-GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet systemd.show_status=no nomodeset"
 # GRUB_CMDLINE_LINUX_DEFAULT=""
 ----
 dann: 
