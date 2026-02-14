@@ -31,8 +31,8 @@ services:
     ports:
       - "8096:8096" # HTTP port
       # - 8920:8920 # HTTPS port
-    devices:
-      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+    # devices:
+      # - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
       # - /dev/vchiq:/dev/vchiq # MMAL/OMX on Raspberry Pi
     labels:
       - homepage.group=Media
@@ -139,3 +139,18 @@ services:
       - 127.0.0.1:2375:2375
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
+  dozzle:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 9999:8080
+    environment:
+      # Uncomment to enable container actions (stop, start, restart). See https://dozzle.dev/guide/actions
+      # - DOZZLE_ENABLE_ACTIONS=true
+      #
+      # Uncomment to allow access to container shells. See https://dozzle.dev/guide/shell
+      # - DOZZLE_ENABLE_SHELL=true
+      #
+      # Uncomment to enable authentication. See https://dozzle.dev/guide/authentication
+      # - DOZZLE_AUTH_PROVIDER=simple
