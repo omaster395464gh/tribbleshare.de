@@ -146,6 +146,7 @@ services:
     ports:
       - 9999:8080
     environment:
+      - DOZZLE_NO_ANALYTICS=true
       # Uncomment to enable container actions (stop, start, restart). See https://dozzle.dev/guide/actions
       # - DOZZLE_ENABLE_ACTIONS=true
       #
@@ -154,3 +155,9 @@ services:
       #
       # Uncomment to enable authentication. See https://dozzle.dev/guide/authentication
       # - DOZZLE_AUTH_PROVIDER=simple
+    labels:
+      - homepage.group=Media
+      - homepage.name=Dozzle
+      - homepage.icon=dozzle.png
+      - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9999/
+      - homepage.description=Simple Container Monitoring and Logging
