@@ -109,8 +109,8 @@ services:
     ## Start as non-root user before initialization (supported: 0, 33, 50-99, 500-600, and 900-1200):
     # user: "1000:1000"
     ## Shared devices for video hardware transcoding (optional):
-    devices:
-      - "/dev/dri:/dev/dri"                         # Required Intel QSV or VAAPI hardware transcoding
+    #devices:
+    #  - "/dev/dri:/dev/dri"                         # Required Intel QSV or VAAPI hardware transcoding
     #  - "/dev/video11:/dev/video11"                 # Video4Linux Video Encode Device (h264_v4l2m2m)
     working_dir: "/photoprism" # do not change or remove
     ## Storage Folders: "~" is a shortcut for your home directory, "." for the current directory
