@@ -1,0 +1,5 @@
+ requests~=2.32.5
+ ocrmypdf~=17.3.0
+ python-dotenv~=1.2.2
+ openai~=2.24.0
+ tenacity~=9.1.4

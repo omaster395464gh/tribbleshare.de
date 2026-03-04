@@ -1,0 +1,163 @@
+= PDF → Mealie Rezepte Import (OCR + OpenAI)
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
+
+Diese Doku beschreibt einen einfachen Workflow, um Rezept-PDFs per OCR lesbar zu machen, daraus per OpenAI strukturierte Rezept-JSONs zu erzeugen und diese anschließend in Mealie zu importieren.
+
+== Voraussetzungen
+
+* Linux oder Windows mit WSL
+* Python *3.14+*
+* link:https://github.com/ocrmypdf/OCRmyPDF[OCRmyPDF]
+* OpenAI Account + API Token (Level 1+)
+* link:https://github.com/mealie-recipes/mealie[Mealie 3.11+] + Access Token
+
+[NOTE]
+====
+Unter WSL empfiehlt sich Ubuntu/Debian. Die OCR-Sprachen `deu` und `eng` decken die meisten Rezept-PDFs gut ab.
+====
+
+== Projektstruktur
+
+[source]
+----
+| ocr.sh                     Script: OCR für PDF-Dateien (1)
+| pdf_to_json_direct.py      Script: OCR-PDF → Recipe JSON (2)
+| mealie_import.py           Script: Import (einzeln oder Batch) (3)
+| requirements.txt
+| .env                       Tokens + Basis-Config (nicht einchecken!)
+| inbox                      Eingang für PDF-Dateien
+|--|- 01.pdf                 Quelle
+   |- 02.pdf                 Quelle
+   |- 03.pdf                 Quelle
+   |- ocr_pdfs/ocr_01.pdf    OCR-PDF
+   |- ocr_pdfs/ocr_02.pdf    OCR-PDF
+   |- ocr_pdfs/ocr_03.pdf    OCR-PDF
+   |- out_json/ocr_01.json   Ergebnis: Mealie Recipe JSON
+   |- out_json/ocr_02.json   Ergebnis: Mealie Recipe JSON
+   |- out_json/ocr_03.json   Ergebnis: Mealie Recipe JSON
+----
+
+== Quickstart
+
+. PDF(s) nach `inbox/` legen
+. OCR laufen lassen (`ocr.sh`)
+. JSON erzeugen (`pdf_to_json_direct.py` oder über Batch-Mode)
+. JSON in Mealie importieren (`mealie_import.py`)
+
+== Python-Installation
+
+[source,shell]
+----
+python -m venv .venv
+# Linux / WSL:
+source .venv/bin/activate
+# Windows (PowerShell):
+# .\.venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+----
+
+== Konfiguration (.env)
+
+Lege eine `.env` im Projektroot an.
+
+[source]
+----
+# OpenAI
+OPENAI_API_KEY=sk-...
+
+# Mealie
+MEALIE_BASE_URL=https://tribbleshare.follow-inconnu.ts.net:9925
+MEALIE_TOKEN=mlt_...
+
+# Verzeichnisse (optional, Default passend zur Struktur oben)
+PDF_DIR=inbox
+OCR_DIR=inbox/ocr_pdfs
+OUT_JSON_DIR=inbox/out_json
+----
+
+[IMPORTANT]
+====
+`.env` enthält Secrets → nicht ins Git committen.
+====
+
+== Texterkennung (OCR)
+
+=== Installation unter WSL (Ubuntu/Debian)
+
+[source,shell]
+----
+sudo apt update
+sudo apt-get install -y ocrmypdf python3-pip tesseract-ocr-deu tesseract-ocr-eng
+ocrmypdf -v
+----
+
+=== OCR ausführen
+
+[source,shell]
+----
+chmod u+x ocr.sh
+./ocr.sh
+----
+
+[NOTE]
+====
+Das Script sollte idealerweise nur PDFs OCRen, die *nicht* bereits `ocr_` heißen (damit du nichts doppelt erzeugst).
+====
+
+== Rezepte erkennen (OCR-PDF → JSON)
+
+Je nach Implementierung kann das direkt als Batch laufen (z. B. alle Dateien in `inbox/ocr_pdfs` → `inbox/out_json`).
+
+[source,shell]
+----
+python pdf_to_json_direct.py
+----
+
+[TIP]
+====
+Wenn du viele PDFs hast: erst OCR als Batch, dann JSON als Batch. So kannst du Fehler leichter eingrenzen (OCR vs. Extraktion).
+====
+
+== Rezepte importieren (JSON → Mealie)
+
+=== Einzelimport (Testlauf)
+
+[source,shell]
+----
+python mealie_import.py --dry-run one "inbox/out_json/ocr_10.json"
+----
+
+=== Batch-Import (über Glob)
+
+[source,shell]
+----
+python mealie_import.py --apply batch --glob "ocr_0?.json"
+----
+
+=== CLI-Hilfe
+
+[source,shell]
+----
+python mealie_import.py -h
+
+usage: mealie_import.py [-h] [--dotenv DOTENV] [--out-json-dir OUT_JSON_DIR]
+                        [--pdf-dir PDF_DIR] [--tag TAG] [--dry-run] [--apply]
+                        {one,batch} ...
+----
+
+== Typische Probleme
+
+* *OCR-PDF ist riesig / langsam:* `ocrmypdf`-Optionen wie `--optimize 3` nutzen, ggf. Bilder runter rechnen.
+* *Rezept wird nicht erkannt:* Prüfe, ob das OCR-Ergebnis wirklich Text enthält (PDF ist manchmal nur Bild + komische Struktur).
+* *Mealie Import schlägt fehl:* Token prüfen, Base URL korrekt, JSON-Schema validieren (z. B. Pflichtfelder wie Name/Zutaten/Steps).
+* *Doppelte Rezepte:* Nutze ein Tag (`MEALIE_TAG`) und/oder eine konsistente Namensgebung beim Import.
+
+== Sicherheit
+
+* Tokens nur in `.env` halten.
+* Logs keine Tokens enthalten lassen.
+* Wenn du Dateien zur OpenAI API sendest: keine personenbezogenen Daten in PDFs lassen, die da nicht hingehören.
