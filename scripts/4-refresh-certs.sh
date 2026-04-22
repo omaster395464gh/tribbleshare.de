@@ -1,6 +1,5 @@
 #!/bin/bash
 #
-date
 pushd $PWD
 
 cd /home/admin/certs || exit
@@ -19,4 +18,3 @@ else
 fi
 
 popd
-date
