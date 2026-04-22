@@ -58,11 +58,11 @@ DEBIAN_FRONTEND=noninteractive \
 NEEDRESTART_MODE=a \
   needrestart -r a >> $LOGFILE 2>&1
 
+# Check / Refresh certs
+su - admin -c "bash /home/admin/tribbleshare.de/scripts/4-refresh-certs.sh" >> $LOGFILE 2>&1
+
 # Update images
 su - admin -c "bash /home/admin/tribbleshare.de/scripts/1-do-upgrade.sh" >> $LOGFILE 2>&1
-
-# Refresh certs
-su - admin -c "bash /home/admin/tribbleshare.de/scripts/4-refresh-certs.sh" >> $LOGFILE 2>&1
 
 # Kernel-Reboot nötig?
 if [ -f /var/run/reboot-required ]; then
