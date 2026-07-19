@@ -18,4 +18,13 @@
         widget:
           type: paperlessngx
           url: http://nassaja.follow-inconnu.ts.net:8777/
-          token: ***********************
+          key: ***********************
+- Wetter:
+    - Weimar:
+        icon: https://noadsweather.com/favicon.ico
+        href:  https://noadsweather.com/?q=M%C3%BChlw%C3%A4rts&lat=50.9827&lon=10.9613&name=Weimar&region=Th%C3%BCringen&country=Germany
+        description: NoAdsWeather Weimar
+    - Mühlwärts:
+        icon: https://noadsweather.com/favicon.ico
+        href:  https://noadsweather.com/?q=M%C3%BChlw%C3%A4rts&lat=50.7847&lon=9.9814&name=Weimar&region=Th%C3%BCringen&country=Germany
+        description: NoAdsWeather Mühlwärts

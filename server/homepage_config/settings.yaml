@@ -21,6 +21,9 @@ layout:
   Media:
     style: row
     columns: 3
+  Wetter:
+    style: row
+    columns: 2
 
 providers:
 # openweathermap: openweathermapapikey

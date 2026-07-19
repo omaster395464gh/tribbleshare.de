@@ -14,3 +14,14 @@
     target: _blank
     suggestionUrl: https://ac.ecosia.org/autocomplete?type=list&q=
     showSearchSuggestions: true # Optional
+
+- openmeteo:
+    label: Weimar Thüringen # optional
+    latitude: 50.9827
+    longitude: 10.9613
+    timezone: Europe/Berlin # optional
+    units: metric # or imperial
+    cache: 5 # Time in minutes to cache API responses, to stay within limits
+    format: # optional, Intl.NumberFormat options
+      maximumFractionDigits: 1
+
