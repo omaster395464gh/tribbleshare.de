@@ -22,7 +22,7 @@
 - Wetter:
     - Weimar:
         icon: https://noadsweather.com/favicon.ico
-        href:  https://noadsweather.com/?q=Weimar&lat=50.9827&lon=10.9613&name=Weimar&region=Th%C3%BCringen&country=Germany
+        href:  https://noadsweather.com/?q=99428&lat=50.9827&lon=10.9613&name=Weimar&region=Th%C3%BCringen&country=Germany
         description: NoAdsWeather Weimar
     - Mühlwärts:
         icon: https://noadsweather.com/favicon.ico
