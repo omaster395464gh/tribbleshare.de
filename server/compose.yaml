@@ -28,6 +28,7 @@ services:
       - ./emby_data/shows:/mnt/shows # Media directory
       - ./emby_data/movies:/mnt/movies # Media directory
       - ./emby_data/music:/mnt/music # Media directory
+      - /Multimedia:/mnt/Multimedia # extern
     ports:
       - "8096:8096" # HTTP port
       # - 8920:8920 # HTTPS port
@@ -147,7 +148,7 @@ services:
     ports:
       - 9999:8080
     environment:
-      - DOZZLE_NO_ANALYTICS=true
+    - DOZZLE_NO_ANALYTICS=true
       # Uncomment to enable container actions (stop, start, restart). See https://dozzle.dev/guide/actions
       # - DOZZLE_ENABLE_ACTIONS=true
       #
@@ -162,3 +163,47 @@ services:
       - homepage.icon=dozzle.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9999/
       - homepage.description=Simple Container Monitoring and Logging
+  calibre:
+    image: crocodilestick/calibre-web-automated:latest
+    container_name: calibre
+    environment:
+      # Only change these if you know what you're doing
+      - PUID=1000
+      - PGID=1000
+      # Edit to match your current timezone e.g. Europe/London, America/New_York - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      - TZ=Europe/Berlin
+      # Hardcover API Key required for Hardcover as a Metadata Provider, get one here: https://docs.hardcover.app/api/getting-started/
+      # - HARDCOVER_TOKEN=your_hardcover_api_key_here
+      # If your library is on a network share (e.g., NFS/SMB), disable WAL to reduce locking issues
+      # Accepts: true/false (default: false)
+      - NETWORK_SHARE_MODE=true
+      # Override the default port (8083) for the web server.
+      # Accepts any valid port number.
+      - CWA_PORT_OVERRIDE=8083
+    volumes:
+      # CW users migrating should stop their existing CW instance, make a copy of the config folder, and bind that here to carry over all of their user settings ect.
+      - ./calibre/config:/config
+      # This is an ingest dir, NOT a library one. Anything added here will be automatically added to your library according to the settings you have configured in CWA Settings page. All files placed here are REMOVED AFTER PROCESSING
+      - ./calibre/ingest:/cwa-book-ingest
+      # If you don't have an existing library, CWA will automatically create one at the bind provided here
+      - ./calibre//library:/calibre-library
+      # If you use calibre plugins, you can bind your plugins folder here to have CWA attempt to add them to its workflow (WIP)
+      # If you are starting with a fresh install, you also need to copy customize.py.json to the Calibre config volume above, in /path/to/config/folder/.config/calibre/customize.py.json, see the note below for more info
+      - ./calibre/plugins:/config/.config/calibre/plugins
+    ports:
+      # Change the first number to change the port you want to access the Web UI, not the second
+      - 8083:8083
+    # If you set CWA_PORT_OVERRIDE to a port below 1024, you may need to uncomment the following line:
+    # cap_add:
+    #   - NET_BIND_SERVICE
+    restart: unless-stopped
+    labels:
+      - homepage.group=Media
+      - homepage.name=Calibre Web Automated
+      - homepage.icon=calibre.png
+      - homepage.href=http://tribbleshare.follow-inconnu.ts.net:8083/
+      - homepage.description=Making Calibre-Web your dream, all-in-one self-hosted digital library solution.
+      - homepage.widget.type=calibreweb
+      - homepage.widget.url=http://tribbleshare.follow-inconnu.ts.net:8083/
+      - homepage.widget.username=${CALIBRE_USERNAME}
+      - homepage.widget.password=${CALIBRE_PASSWORD}
