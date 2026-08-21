@@ -19,6 +19,16 @@
           type: paperlessngx
           url: http://nassaja.follow-inconnu.ts.net:8777/
           key: ***********************
+    - Calibre Web:
+        icon: calibre.png
+        href: http://nassaja.follow-inconnu.ts.net:8083/
+        description: Making Calibre-Web your dream, all-in-one self-hosted digital library solution.
+        widget:
+          type: calibreweb
+          url: http://nassaja.follow-inconnu.ts.net:8083/
+          username: homepage
+          password: ***********************
+
 - Wetter:
     - Weimar:
         icon: https://noadsweather.com/favicon.ico
