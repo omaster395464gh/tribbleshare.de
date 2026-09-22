@@ -12,18 +12,18 @@ multi-ecosystem-groups:
 
 updates:
   - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/server" # Location of package manifests
     schedule:
       interval: "weekly"
 
 updates:
   - package-ecosystem: "docker-compose" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/server" # Location of package manifests
     schedule:
       interval: "weekly"
 
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/scripts/mealie_importer" # Location of package manifests
     schedule:
       interval: "weekly"
