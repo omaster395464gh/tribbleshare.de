@@ -2,4 +2,4 @@
  ocrmypdf~=17.12.1
  python-dotenv~=1.2.3
  openai~=3.16.2
- tenacity~=9.1.4
+ tenacity~=9.2.1
