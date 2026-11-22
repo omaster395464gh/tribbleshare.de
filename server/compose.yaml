@@ -91,8 +91,10 @@ services:
     ports:
       - 9978:80
     volumes:
-      - ./data_audiobookshelf/audiobooks:/audiobooks
-      - ./data_audiobookshelf/podcasts:/podcasts
+      # - ./data_audiobookshelf/audiobooks:/audiobooks
+      # - ./data_audiobookshelf/podcasts:/podcasts
+      - /Multimedia/Audiobookshelf/audiobooks:/audiobooks
+      - /Multimedia/Audiobookshelf/podcasts:/podcasts
       - ./data_audiobookshelf/config:/config
       - ./data_audiobookshelf/metadata:/metadata
     # set user 1000
@@ -145,6 +147,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./dozzle_data:/data
     ports:
       - 9999:8080
     environment:
@@ -163,3 +166,24 @@ services:
       - homepage.icon=dozzle.png
       - homepage.href=http://tribbleshare.follow-inconnu.ts.net:9999/
       - homepage.description=Simple Container Monitoring and Logging
+  navidrome:
+    image: navidrome/navidrome:latest
+    user: 1000:1000 # must own the data folder and be able to read music folder(s). See Permissions below
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    environment:
+      # Optional: put your config options customization here. Examples:
+      ND_LOGLEVEL: info
+      ND_ENABLEINSIGHTSCOLLECTOR: false 
+      # PUID: 1000
+      # PGID: 1000
+    volumes:
+      - "./navidrome/data:/data"
+      - "/Multimedia/Musik/_navidrome:/music:ro"
+    labels:
+      - homepage.group=Media
+      - homepage.name=Navidrome
+      - homepage.icon=navidrome.png
+      - homepage.href=http://tribbleshare.follow-inconnu.ts.net:4533/
+      - homepage.description=Your Personal Streaming Service
